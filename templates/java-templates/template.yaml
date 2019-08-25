@@ -1,9 +1,9 @@
 version: 1
 type: pipeline-template
 
-name: Javascript multibranch pipeline
+name: Java multibranch pipeline
 templateType: MULTIBRANCH
-description: Test, Build and Deploy for Javascript application
+description: Test, Build and Deploy for Java applications
 parameters:
   - name: repoOwner
     type: string
