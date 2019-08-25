@@ -1,3 +1,7 @@
+library 'buzz-shared-library@master'
+def mavenPodYaml = libraryResource 'podtemplates/maven-pod.yaml'
+def kanikoPodYaml = libraryResource 'podtemplates/kaniko-pod.yaml'
+def helmKubectlYaml = libraryResource 'podtemplates/helm-kubectl-pod.yaml'
 pipeline {
   agent none
   options { 
@@ -9,7 +13,7 @@ pipeline {
 	        agent {
             kubernetes {
                 label 'maven'
-                yamlFile 'pod-templates/maven-pod.yaml'
+                yamlFile mavenPodYaml
                 }
             }	
             stages{
@@ -52,7 +56,7 @@ pipeline {
          agent {
             kubernetes {
                 label 'kaniko'
-                yamlFile 'pod-templates/kaniko-pod.yaml'
+                yamlFile kanikoPodYaml
                 }
             }
             steps {
@@ -73,7 +77,7 @@ pipeline {
          agent {
             kubernetes {
                 label 'helm-kubectl'
-                yamlFile 'pod-templates/helm-kubectl-pod.yaml'
+                yamlFile helmKubectlYaml
                 }
             }
             steps {
