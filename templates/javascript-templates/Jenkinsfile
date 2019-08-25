@@ -13,7 +13,7 @@ pipeline {
 	 agent {
             kubernetes {
                 label 'node'
-                yamlFile nodePodYaml
+                yaml nodePodYaml
                 }
             }	
             stages{
@@ -57,7 +57,7 @@ pipeline {
          agent {
             kubernetes {
                 label 'kaniko'
-                yamlFile kanikoPodYaml
+                yaml kanikoPodYaml
                 }
             }
             steps {
@@ -79,7 +79,7 @@ pipeline {
          agent {
             kubernetes {
                 label 'helm-kubectl'
-                yamlFile helmKubectlYaml
+                yaml helmKubectlYaml
                 }
             }
             steps {
