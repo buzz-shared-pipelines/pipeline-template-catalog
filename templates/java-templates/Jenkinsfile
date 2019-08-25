@@ -8,6 +8,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
     skipDefaultCheckout true
   }
+  
   stages {
         stage('Acquiring pod') {
 	        agent {
@@ -94,6 +95,8 @@ pipeline {
                 sh "helm upgrade ${applicationName} chartmuseum/${applicationName} \
                 -i --namespace cje \
                 --set image.tag=${version}-${commitHash}"
+                publishEvent simpleEvent("${applicationName}:${version}")
+
                    }
               }
             }
