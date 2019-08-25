@@ -1,0 +1,24 @@
+version: 1
+type: pipeline-template
+
+name: Javascript multibranch pipeline
+templateType: MULTIBRANCH
+description: Test, Build and Deploy for Javascript application
+parameters:
+  - name: repoOwner
+    type: string
+    displayName: Repository Owner
+  - name: githubCredentialId
+    displayName: GitHub Credential ID
+    type: CREDENTIALS
+    defaultValue: github-token
+  - name: applicationName
+    displayName: Application name
+    type: string 
+multibranch:
+  branchSource:
+    github:
+      id: ${applicationName}-job
+      credentialsId: ${githubCredentialId}
+      repoOwner: ${repoOwner}
+      repository: ${applicationName}

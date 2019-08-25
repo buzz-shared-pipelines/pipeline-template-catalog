@@ -1,0 +1,4 @@
+name: buzz-pipeline-catalog
+displayName: Buzz pipeline catalog
+version: 1
+type: pipeline-template-catalog
