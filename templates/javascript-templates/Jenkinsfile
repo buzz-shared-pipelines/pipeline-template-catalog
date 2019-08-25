@@ -61,7 +61,11 @@ pipeline {
                 unstash 'Dockerfile'
                 withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
             	sh """#!/busybox/sh
-            	executor -f ${pwd()}/Dockerfile -c git://github.com/buzz-microservices/frontend-todo.git -d gcr.io/na-csa-msuarez/frontend-todo:${BUILD_NUMBER} -d gcr.io/na-csa-msuarez/frontend-todo:${version}-${commitHash} -d gcr.io/na-csa-msuarez/frontend-todo:latest
+            	executor -f ${pwd()}/Dockerfile 
+                -c git://github.com/${repoOwner}/${applicationName}.git \
+                -d gcr.io/na-csa-msuarez/${applicationName}:${BUILD_NUMBER} \
+                -d gcr.io/na-csa-msuarez/${applicationName}:${version}-${commitHash} \
+                -d gcr.io/na-csa-msuarez/${applicationName}:latest
                 """
                    }
               }
@@ -82,7 +86,9 @@ pipeline {
 		        sh """curl -L --data-binary "@frontend-todo-0.0.1.tgz" http://34.67.152.26:8080/api/charts"""
 		        sh "helm init --client-only"
 		        sh "helm repo add chartmuseum http://34.67.152.26:8080"
-                sh "helm upgrade frontend-todo chartmuseum/frontend-todo -i --namespace cje --set image.tag=${version}-${commitHash}"
+                sh "helm upgrade frontend-todo chartmuseum/frontend-todo \
+                -i --namespace cje \
+                --set image.tag=${version}-${commitHash}"
                    }
             }
               }

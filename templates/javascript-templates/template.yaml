@@ -7,6 +7,7 @@ description: Test, Build and Deploy for Javascript application
 parameters:
   - name: repoOwner
     type: string
+    description: Github Organization name
     displayName: Repository Owner
   - name: githubCredentialId
     displayName: GitHub Credential ID
