@@ -18,7 +18,7 @@ pipeline {
                         container('node') {
                         checkout scm
                         sh 'npm install'
-		                stash includes: 'Dockerfile', name: 'Dockerfile'
+		                //stash includes: 'Dockerfile', name: 'Dockerfile'
                         script{
 		                version = sh(returnStdout: true, script: """
                         node -pe "require('./package.json').version" | tr -d '[:space:]'
@@ -58,7 +58,7 @@ pipeline {
             }
             steps {
               container(name: 'kaniko', shell: '/busybox/sh') {
-                unstash 'Dockerfile'
+                //unstash 'Dockerfile'
                 withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
             	sh """#!/busybox/sh
             	executor -f ${pwd()}/Dockerfile \
