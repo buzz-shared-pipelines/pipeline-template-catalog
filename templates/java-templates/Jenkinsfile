@@ -85,7 +85,9 @@ pipeline {
               container('helm-kubectl') {
                 //sh "curl -X DELETE http://34.67.152.26:8080/api/charts/${applicationName}/0.0.1"
 		            sh "helm package --app-version ${version} --debug --save=false chart/${applicationName}"
-		            sh """curl -L --data-binary "@${(find . -name *.tgz)}" http://34.67.152.26:8080/api/charts"""
+		            script{
+		              chart_tgz = sh(returnStdout: true, script: "find . -name *.tgz")
+ 		            }		            sh """curl -L --data-binary "@${chart_tgz}" http://34.67.152.26:8080/api/charts"""
 		            sh "helm init --client-only"
 		            sh "helm repo add chartmuseum http://34.67.152.26:8080"
                 sh "helm upgrade ${applicationName} chartmuseum/${applicationName} \
