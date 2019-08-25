@@ -61,7 +61,7 @@ pipeline {
                 //unstash 'Dockerfile'
                 withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
             	sh """#!/busybox/sh
-            	executor -f ${pwd()}/Dockerfile \
+            	executor \
                 -c git://github.com/${repoOwner}/${applicationName}.git \
                 -d gcr.io/na-csa-msuarez/${applicationName}:${BUILD_NUMBER} \
                 -d gcr.io/na-csa-msuarez/${applicationName}:${version}-${commitHash} \
