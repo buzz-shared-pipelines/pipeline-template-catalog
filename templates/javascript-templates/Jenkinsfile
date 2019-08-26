@@ -79,7 +79,9 @@ pipeline {
             }
         }
         stage('Helm install') {
+              steps{
                 helmDeploy("${applicationName}","${commitHash}","${version}")
+              }
               }
             
         
