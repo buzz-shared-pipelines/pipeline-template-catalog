@@ -5,7 +5,7 @@ def helmKubectlYaml = libraryResource 'podtemplates/helm-kubectl-pod.yaml'
 pipeline {
   agent none
   triggers {
-    eventTrigger jmespathQuery(“contains(event,’backend-location’) && !contains(event, ‘-SNAPSHOT’)”)
+    eventTrigger jmespathQuery("contains(event,'backend-location') && !contains(event, '-SNAPSHOT')")
   }
   options { 
     buildDiscarder(logRotator(numToKeepStr: '5'))
