@@ -101,7 +101,9 @@ pipeline {
               }
             }
             stage('Helm install -2 ') {
+                steps{
                 helmDeploy("${applicatioName}","${commitHash}","${version}")
+                }
             }
 
         
