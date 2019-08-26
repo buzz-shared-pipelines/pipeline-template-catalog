@@ -100,6 +100,10 @@ pipeline {
                    }
               }
             }
+            stage('Helm install -2 ') {
+                helmDeploy("${applicatioName}","${commitHash}",$"${version}")
+            }
+
         
     }
 }
